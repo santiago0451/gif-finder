@@ -4,7 +4,7 @@
 This is a simple gif finder, you can search in the navigation bar whatever you want and if it exists it will gives you depending on the topic a lot or few gifs.
 
 
-## Appendix
+## General
 
 Because it just a simple navigation application, you only can see gifs, you can't select or do nothing with these gifs, it was only a practice where I used my knowledge to create a navbar.
 
