@@ -29,13 +29,15 @@ export default function App() {
   }
 
   function fetchAndSendInputValue() {
-    const apiKey = "fo3rkJN8rN4yN24Y1O4yzgAGwOFcgz2D";
-    const defaultEndpoint = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${inputValue}`;
+    if (inputValue.trim() !== "") {
+      const apiKey = "fo3rkJN8rN4yN24Y1O4yzgAGwOFcgz2D";
+      const defaultEndpoint = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${inputValue}`;
 
-    fetch(defaultEndpoint)
-      .then((response) => response.json())
-      .then((jsonResponse) => setGifs(jsonResponse.data))
-      .catch((error) => console.log(error));
+      fetch(defaultEndpoint)
+        .then((response) => response.json())
+        .then((jsonResponse) => setGifs(jsonResponse.data))
+        .catch((error) => console.log(error));
+    }
   }
 
   function handleKeyPress(event) {
@@ -46,7 +48,7 @@ export default function App() {
 
   function inputLogic(event) {
     const inputValue = event.target.value;
-    setInputValue(inputValue);
+    setInputValue(inputValue.trim());
 
     if (inputValue === "") {
       fetchDefaultGifs();
@@ -62,7 +64,11 @@ export default function App() {
           onChange={inputLogic}
           onKeyDown={handleKeyPress}
         />
-        <button onClick={fetchAndSendInputValue} className="button primary">
+        <button
+          onClick={fetchAndSendInputValue}
+          className="button primary"
+          disabled={!inputValue.trim()}
+        >
           <SearchIcon />
         </button>
       </nav>
