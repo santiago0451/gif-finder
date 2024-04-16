@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { SearchIcon } from "src/components/icons/SearchIcon";
 import Masonry from "react-masonry-css";
 import "./styles.scss";
 
-function App() {
+export default function App() {
   const breakpointColumnsObj = {
     default: 3,
     1024: 2,
@@ -56,23 +57,23 @@ function App() {
     <>
       <nav>
         <input
-          placeholder="Busca un gif"
+          placeholder="Search a gif"
           value={inputValue}
           onChange={inputLogic}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
         />
         <button onClick={fetchAndSendInputValue} className="button primary">
-          🔍
+          <SearchIcon />
         </button>
       </nav>
-      <main>
+      <main className="main">
         <div>
           <Masonry
             breakpointCols={breakpointColumnsObj}
             className="my-masonry-grid"
             columnClassName="my-masonry-grid-column"
           >
-            {gifs.map((gif) => (
+            {gifs.map((gif: any) => (
               <div key={gif.id}>
                 <img src={gif.images.fixed_width.url} alt={gif.alt_text} />
               </div>
@@ -83,5 +84,3 @@ function App() {
     </>
   );
 }
-
-export default App;
